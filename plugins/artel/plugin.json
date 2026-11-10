@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "artel",
+  "version": "0.1.0",
+  "description": "ARTEL 스테이징 MCP와 Unity SDK, 자동 QA용 스킬을 설치합니다.",
+  "extensions": {
+    "com.openai": {
+      "interface": { "displayName": "ARTEL" }
+    }
+  }
+}

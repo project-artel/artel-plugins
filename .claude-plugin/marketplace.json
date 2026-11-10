@@ -1,0 +1,8 @@
+{
+  "name": "artel-plugins",
+  "description": "ARTEL MCP와 QA 스킬을 배포합니다.",
+  "owner": { "name": "ARTEL" },
+  "plugins": [
+    { "name": "artel", "source": "./plugins/artel" }
+  ]
+}

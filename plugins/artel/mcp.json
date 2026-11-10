@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "artel-macro": {
+      "type": "streamable-http",
+      "url": "https://stage-mcp.artel.kr/mcp"
+    }
+  }
+}
