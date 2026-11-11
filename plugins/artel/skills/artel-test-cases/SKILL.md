@@ -13,6 +13,22 @@ As the coding agent, author cases and review them before saving. The QA agent ru
 them in the game build. Base each case on the controls and evidence available to
 the QA agent, even when you can see more in the source.
 
+Read [the QA Agent runtime reference](references/qa-agent-runtime.md) before
+deciding whether a target build and run can reach, perform, and judge a case.
+
+## Coverage selection
+
+Before generating new cases, use [references/coverage-presets.md](references/coverage-presets.md)
+to translate the user's request into a coverage preset for each area. Apply
+explicit area instructions first. Default to Core gameplay flows where the user
+has left the depth open. Ask one focused question only if two plausible
+interpretations would materially change the case list. Honor explicit requests
+for particular conditions or variants within the chosen scope.
+
+Report the preset and scope used for each area alongside the cases. For
+exhaustive content coverage, report how many identified items have authorable
+cases and name items whose cases still need verification or are deferred.
+
 ## Candidate selection
 
 1. Identify the project and target build. Review existing cases and state names;
@@ -34,12 +50,14 @@ the QA agent, even when you can see more in the source.
 
 ## Momentary events
 
-Exclude short-lived events as standalone automated QA cases when their verdict
-depends on catching the event itself. Examples include a projectile crossing the
-screen, a brief hit effect, and a short animation. Assume point-in-time screenshots;
-do not rely on continuous screen observation. List these as manual checks when
-coverage is needed. A lasting result may be a separate case if the QA agent can
-attribute it to the action and target. Report only the outcome that case checks.
+Exclude short-lived events as standalone automated QA cases when the verdict
+depends on catching them in a screenshot or sampled value. Examples include a
+projectile crossing the screen, a brief hit effect, and a short animation. A
+structured event can support a case if the target run receives it and it is
+still readable at verdict time. List cases without that evidence as manual
+checks when coverage is needed. A lasting result may be a separate case if the
+QA agent can attribute it to the action and target. Report only the outcome that
+case checks.
 
 ## Before-and-after comparisons
 

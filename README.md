@@ -30,5 +30,5 @@ Claude Code를 열고 `/mcp`에서 `plugin:artel:artel-macro`를 선택해 로�
 
 ## 스킬 원본과 업데이트
 
-`plugins/artel/skills/`에는 [`project-artel/artel-skills`의 `1d410fd`](https://github.com/project-artel/artel-skills/tree/1d410fdebf313d73ea816aa992feefdf3a290e18) 스킬 7개와 참조 파일을 함께 담았습니다.
-스킬을 수정할 때는 원본 저장소에서 먼저 반영하고, 배포할 revision의 `skills/`와 `LICENSE`를 이 저장소에 동기화합니다. 이 문서의 revision과 두 manifest의 버전도 함께 갱신합니다.
+`plugins/artel/skills/`에는 [`project-artel/artel-skills`의 `e049073`](https://github.com/project-artel/artel-skills/tree/e049073ee6eb3bb878d60a191041a50f88c254c1) 기준 스킬 7개와 참조 파일을 담았습니다.
+스킬 번들을 갱신할 때 이 문서의 기준 커밋과 두 manifest의 버전을 함께 갱신합니다.
