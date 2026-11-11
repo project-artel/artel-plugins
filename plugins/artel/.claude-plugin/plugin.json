@@ -1,7 +1,7 @@
 {
   "name": "artel",
   "displayName": "ARTEL",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "ARTEL 스테이징 MCP와 Unity SDK, 자동 QA용 스킬을 설치합니다.",
   "author": { "name": "ARTEL" }
 }
