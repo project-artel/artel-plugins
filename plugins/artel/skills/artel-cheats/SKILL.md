@@ -8,7 +8,32 @@ description: >-
   failing with SETUP-FAILED. For routines that keep running every frame, use artel-behaviors.
 ---
 
-# ARTEL cheats
+# ARTEL one-time Game Functions
+
+Check the game's installed SDK for `ArtelGameFunctionMode.Setup` and
+`ArtelGameFunctionMode.ReadOnly` before using these examples. When a mode is
+unavailable, use the `[ArtelCheat]` examples below for setup and use the UI or
+existing observations for assertions. Flag any missing observation during case
+review.
+
+Use `[ArtelGameFunction("description", ArtelGameFunctionMode.Setup)]` for a function
+that prepares a test precondition. Use `ArtelGameFunctionMode.ReadOnly` to return a
+short string from the live game without changing state. Prefer a read-only function
+for computed values that the existing UI or `[ArtelObserve]` does not expose.
+
+```csharp
+[ArtelGameFunction("Reads the current XP.", ArtelGameFunctionMode.ReadOnly)]
+static string GetCurrentXP() => $"xp={PlayerProgress.CurrentXP}";
+```
+
+Replace `PlayerProgress` with the game's own API. Keep the function and its
+`when` guard free of side effects. Read the result before and after the real
+input when a Test Case compares values. The QA Agent calls setup and read-only
+functions with `call_game_function`. Both use the one-time allowlist
+(`allowedCheats` in the API). Confirm registration with `list_game_functions`
+on the development build before including a function in a runnable Test Case.
+
+The older `[ArtelCheat]` examples below remain valid for games on earlier SDKs.
 
 A cheat is a C# method the QA agent calls once through the SDK to change game state. The agent uses
 cheats to reach a test case's **precondition** fast. It must never use one to produce the value a

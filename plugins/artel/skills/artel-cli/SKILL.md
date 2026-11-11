@@ -87,6 +87,13 @@ omit both their `folderId` and the command's `--folder`.
 
 ### File shapes that trip people up
 
+For runnable Test Cases, confirm the target build can reach the precondition,
+accept the real game input, and expose the expected result. Where the target
+build registers them, use a Setup Game Function for a hard-to-reach starting
+state and a ReadOnly Game Function to check a value the screen does not show.
+Keep the case text to the precondition,
+action, and expected result. List any missing function outside the runnable cases.
+
 `cases.json` (one object or an array):
 
 ```json
