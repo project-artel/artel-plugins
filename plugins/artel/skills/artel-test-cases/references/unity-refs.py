@@ -121,7 +121,7 @@ def main() -> int:
         # finds nothing, and taking that as "no references" would be wrong.
         print(
             f"{target} is binary-serialized, not text YAML: its references cannot be read from the file. "
-            "Do not guess them; treat facts that depend on this file as needing build verification.",
+            "Do not guess them; mark facts that depend on this file 'Confirm by running'.",
             file=sys.stderr,
         )
         return 3

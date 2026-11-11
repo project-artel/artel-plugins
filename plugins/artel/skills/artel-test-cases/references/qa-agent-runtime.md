@@ -45,7 +45,7 @@ count `N`. Click the visible **End Turn** button. Wait for the build's observabl
 turn-transition condition, then read the same battle's turn count. The expected
 value is `N + 1`. A game-specific member such as `TurnBattleSystem::TurnCount`
 can supply the evidence if the target run can read it. If the source contains
-that member but the build has yet to return it, classify the case as **Needs
-build verification** and name the missing check. At execution time, a missing
+that member but the build has yet to return it, classify the case as **Confirm by
+running** and name the missing check. At execution time, a missing
 comparison value and an observed value different from `N + 1` are distinct
 results.

@@ -68,11 +68,14 @@ It prints each reference beside the asset file it points to, in list order, such
   hides the file names that would show the mix-up.
 - A scene or prefab saved as binary (the file does not begin with `%YAML`) cannot be
   read this way. Do not guess its contents. Mark the cases that depend on it
-  **Needs build verification**.
+  **Confirm by running**.
 - When several cases rest on one fact read from data, such as which level comes
-  first, a level's layout, or a starting value, record the fact and its evidence
-  (the script's output line or `file:line`) in your notes. During review, derive it
-  again independently before saving.
+  first, a level's layout, or a starting value, record the fact once with its
+  evidence (the script's output line or `file:line`). Use the evidence column of the
+  game knowledge file (`artel/game-knowledge.md`) when the project keeps one, and
+  your notes otherwise. During review, derive each such fact again without reading
+  the recorded evidence first, then compare. On a mismatch, fix the record and every
+  case that rests on it.
 
 ## Momentary events
 
@@ -123,7 +126,7 @@ cases for evidence that the game received the attempt; an unchanged state
 alone may also mean the agent missed the input.
 
 - **Authorable:** There is evidence for reach, act, and judge in the target build.
-- **Needs build verification:** The path is plausible but the action or evidence
+- **Confirm by running:** The path is plausible but the action or evidence
   has not been confirmed for that build. Name the check still needed.
 - **Deferred:** An action, starting condition, or observation is missing, or
   the case depends on a momentary event. Record why and, where useful, suggest
@@ -149,7 +152,7 @@ registration, but creating them alone does not complete a registration request.
    unavailable or lacks a required operation, or when the user requests the CLI;
    read [the CLI skill](../artel-cli/SKILL.md) for its workflow.
 2. After the review above, register only Authorable cases in the target project
-   and requested folders. Report Needs build verification and Deferred candidates
+   and requested folders. Report Confirm by running and Deferred candidates
    separately with their missing prerequisites; do not register them as runnable
    cases.
 3. Read back each created case through MCP or the CLI and compare its scene,
