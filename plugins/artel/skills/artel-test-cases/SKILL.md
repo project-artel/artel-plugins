@@ -1,10 +1,13 @@
 ---
 name: artel-test-cases
 description: >-
-  Write, revise, or review ARTEL automated QA test cases against a target game build.
-  Use for ARTEL TC authoring, QA feasibility reviews, and deciding whether an existing
-  or small test-only cheat or behavior can make a case runnable. Covers ARTEL QA cases,
-  including 테스트 케이스 작성 and TC 검토, rather than Unity EditMode or PlayMode tests.
+  Create, revise, or review ARTEL automated QA test cases against a target game build.
+  Use when the user asks to create test cases or TCs, including TC 만들어줘,
+  테스트 케이스 작성, and TC 검토. For creation requests, author and review the cases,
+  then register Authorable cases in ARTEL through MCP or the CLI unless the user
+  requests only a draft, review, or local files. Also use for QA feasibility reviews
+  and deciding whether existing or small test-only cheats or behaviors can make a
+  case runnable. Covers ARTEL QA cases rather than Unity EditMode or PlayMode tests.
 ---
 
 # ARTEL automated QA test cases
