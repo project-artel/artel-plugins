@@ -103,9 +103,35 @@ alone may also mean the agent missed the input.
   the case depends on a momentary event. Record why and, where useful, suggest
   manual coverage or the minimum support that would unblock it.
 
-If asked to save, submit only authorable cases through the existing ARTEL
-workflow. Report the other candidates and reasons separately. Authorability,
-console review status, and an actual QA verdict are separate results.
+Submit only authorable cases using the ARTEL registration workflow below.
+Report the other candidates and reasons separately. Authorability, console
+review status, and an actual QA verdict are separate results.
 
 Read [references/few-shot.md](references/few-shot.md) for examples when applying
 these rules to timing, blocked actions, mixed damage, or test support decisions.
+
+## ARTEL registration workflow
+
+Treat a request to create ARTEL test cases as a request to author, review, and
+register them in ARTEL through MCP or the CLI. If the user asks only for a draft,
+review, or local files, follow that scope instead. Local files may support
+registration, but creating them alone does not complete a registration request.
+
+1. Before authoring, use the connected ARTEL MCP tools to identify the target
+   project and inspect existing cases and folders. Follow the user's requested
+   organization and reuse matching cases. Use the ARTEL CLI when MCP is
+   unavailable or lacks a required operation, or when the user requests the CLI;
+   read [the CLI skill](../artel-cli/SKILL.md) for its workflow.
+2. After the review above, register only Authorable cases in the target project
+   and requested folders. Report Needs build verification and Deferred candidates
+   separately with their missing prerequisites; do not register them as runnable
+   cases.
+3. Read back each created case through MCP or the CLI and compare its scene,
+   precondition, step, expectedValue, and folder assignment with the reviewed
+   content. If creation partially fails, inspect the existing results before
+   retrying so successful cases are not duplicated.
+4. Report the target project, created case IDs, folder assignment, and read-back
+   result. Distinguish registration from an actual QA execution result. If no
+   cases are Authorable, explain why none were registered. If neither MCP nor the
+   CLI can complete registration, report the blocker and any completed work
+   instead of treating local files as completion.
