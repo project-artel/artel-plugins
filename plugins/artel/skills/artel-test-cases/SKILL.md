@@ -70,12 +70,12 @@ It prints each reference beside the asset file it points to, in list order, such
   read this way. Do not guess its contents. Mark the cases that depend on it
   **Confirm by running**.
 - When several cases rest on one fact read from data, such as which level comes
-  first, a level's layout, or a starting value, record the fact once with its
-  evidence (the script's output line or `file:line`). Use the evidence column of the
-  game knowledge file (`artel/game-knowledge.md`) when the project keeps one, and
-  your notes otherwise. During review, derive each such fact again without reading
-  the recorded evidence first, then compare. On a mismatch, fix the record and every
-  case that rests on it.
+  first, a level's layout, or a starting value, record the fact once in the game
+  knowledge file (`artel/game-knowledge.md` in the game repository), with its
+  evidence (the script's output line or `file:line`) in the evidence column. Create
+  the file if it does not exist. During review, derive each such fact again without
+  reading the recorded evidence first, then compare. On a mismatch, fix the row and
+  every case that rests on it.
 
 ## Momentary events
 
