@@ -2,7 +2,7 @@
 """Print the asset paths that serialized fields in a Unity scene, prefab or asset point to.
 
 A field in a .unity, .prefab or .asset file names its target by guid, for example
-`levels: - {fileID: 4900000, guid: dc5d..., type: 3}`. The guid belongs to the target's
+`items: - {fileID: 11400000, guid: <32 hex digits>, type: 2}`. The guid belongs to the target's
 .meta file. This script resolves every guid by reading each .meta file itself and prints
 each reference beside the file it points to, in the order the field lists them.
 
@@ -12,8 +12,8 @@ over several files returns matches in a different order on every run, and
 
 Usage:
   python3 unity-refs.py <project root> <scene, prefab or asset path>
-  python3 unity-refs.py <project root> <path> --field levels
-  python3 unity-refs.py <project root> <path> --component LevelLoader
+  python3 unity-refs.py <project root> <path> --field items
+  python3 unity-refs.py <project root> <path> --component Spawner
 
 Output, one line per reference:
   <GameObject> / <component script> . <field>[<index>] -> <asset path>

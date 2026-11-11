@@ -58,8 +58,8 @@ name. Resolve those references with
 [the reference script](references/unity-refs.py) rather than by matching guids
 yourself:
 `python3 <this skill>/references/unity-refs.py <project root> <scene, prefab or asset> [--field <name>]`.
-It prints each reference beside the asset file it points to, in list order, such as
-`LevelLoader / LevelLoader . levels[0] -> Assets/Resources/Levels/level0.txt`.
+It prints each reference beside the asset file it points to, in list order, as
+`<GameObject> / <component script> . <field>[<index>] -> <asset path>`.
 
 - Without the script, look up one guid at a time and keep the file name in the
   output: `grep -rl "guid: <guid>" --include=*.meta Assets`. Never pair values from a
