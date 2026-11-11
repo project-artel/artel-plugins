@@ -32,3 +32,4 @@ Claude Code를 열고 `/mcp`에서 `plugin:artel:artel-macro`를 선택해 로�
 `plugins/artel/skills/`에는 [`project-artel/artel-skills`의 `e049073`](https://github.com/project-artel/artel-skills/tree/e049073ee6eb3bb878d60a191041a50f88c254c1) 기준 스킬 6개와 참조 파일을 담았습니다.
 원본의 `artel-mcp` 스킬은 넣지 않습니다. 로컬 프로토타입(`artel-mcp-poc`)을 설치하는 안내라서, 플러그인이 연결하는 원격 서버 `artel-macro`와 관계가 없습니다. 그대로 넣으면 "MCP 셋팅" 같은 요청에 이 스킬이 먼저 쓰여 로컬 프로토타입을 설치하려 듭니다.
 스킬 번들을 갱신할 때 이 문서의 기준 커밋과 두 manifest의 버전을 함께 갱신하고, `artel-mcp`는 계속 뺍니다.
+`project-artel/artel-skills` 는 2026-11-11 에 archive 되었습니다. 그 뒤의 스킬 변경은 이 레포의 `plugins/artel/skills/` 에서 직접 하고, 그때도 두 manifest 의 버전을 올립니다.

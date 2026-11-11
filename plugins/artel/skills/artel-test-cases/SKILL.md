@@ -51,6 +51,29 @@ cases and name items whose cases still need verification or are deferred.
    discrepancy. Keep any narrower, independently verifiable result in a
    separate case.
 
+## Facts read from game data
+
+Scenes, prefabs, and ScriptableObjects name the assets they use by guid, not by file
+name. Resolve those references with
+[the reference script](references/unity-refs.py) rather than by matching guids
+yourself:
+`python3 <this skill>/references/unity-refs.py <project root> <scene, prefab or asset> [--field <name>]`.
+It prints each reference beside the asset file it points to, in list order, such as
+`LevelLoader / LevelLoader . levels[0] -> Assets/Resources/Levels/level0.txt`.
+
+- Without the script, look up one guid at a time and keep the file name in the
+  output: `grep -rl "guid: <guid>" --include=*.meta Assets`. Never pair values from a
+  search over several files by the order of its output. In Claude Code's shell,
+  `grep` over several files returns them in a different order on each run, and `-h`
+  hides the file names that would show the mix-up.
+- A scene or prefab saved as binary (the file does not begin with `%YAML`) cannot be
+  read this way. Do not guess its contents. Mark the cases that depend on it
+  **Needs build verification**.
+- When several cases rest on one fact read from data, such as which level comes
+  first, a level's layout, or a starting value, record the fact and its evidence
+  (the script's output line or `file:line`) in your notes. During review, derive it
+  again independently before saving.
+
 ## Momentary events
 
 Exclude short-lived events as standalone automated QA cases when the verdict
