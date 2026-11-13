@@ -5,7 +5,8 @@ description: >-
   precondition in one call instead of playing up to it: go to a scene, unlock a stage, defeat the
   enemies on screen, see the ending, heal. Use when the user asks to "add a cheat", "치트키 만들어줘",
   "씬 이동 치트", "적 다 죽이는 치트", "엔딩 보는 치트", "[ArtelCheat]", or wants the QA agent to stop
-  failing with SETUP-FAILED. For routines that keep running every frame, use artel-behaviors.
+  failing with SETUP-FAILED. Also use for game-specific reset_game overrides with
+  [ArtelOverrideCheat]. For routines that keep running every frame, use artel-behaviors.
 ---
 
 # ARTEL one-time Game Functions
@@ -140,6 +141,43 @@ public static class MyGameFunctions
 
 The compile-time rules (types, names, instance methods, release builds) are in
 `references/reference.md`; a mistake is a compile error from the weaver, not a runtime surprise.
+
+## Override the built-in reset_game cheat
+
+Check that the installed SDK contains `ArtelOverrideCheatAttribute.cs`. Use the override when
+the game's own restart or new-game flow is needed to establish a repeatable QA starting state.
+Inspect how that flow handles loaded scenes, persistent managers, static state, and saved progress.
+
+```csharp
+#if ARTEL_GAME_FUNCTIONS
+using System.Collections;
+using Artel;
+
+internal static class MyGameReset
+{
+    [ArtelOverrideCheat("reset_game", "Returns to the title screen and resets the current run.")]
+    private static IEnumerator ResetGame(bool clearPlayerPrefs, bool resetStatics)
+    {
+        yield return GameSession.ResetForQa(clearPlayerPrefs, resetStatics);
+    }
+}
+#endif
+```
+
+Replace the example's `GameSession.ResetForQa` with the game's own reset flow. Register one
+override in the game. The attribute takes the built-in cheat's string name. The method must be
+static and declare both parameters with the names and types shown. It may return `void`,
+`string`, or `IEnumerator`. Wait for asynchronous scene and save work before completing.
+
+Both the console or QA `reset_game` action and `invoke_cheat` with `name: "reset_game"` run the
+override. The SDK ends ARTEL behaviors, restores its pause, and releases virtual input before the
+override. The game owns scene changes, persistent managers, and interpreting `clearPlayerPrefs`
+(default `false`) and `resetStatics` (default `true`). Keep ARTEL credentials and configuration
+when clearing game preferences. An override failure is reported as a reset failure.
+
+In an Editor or development build, verify the catalog lists one `reset_game` entry and call both
+actions from a changed game state. Verify repeated resets reach the same starting state, the
+save-clearing flag has the intended effect, and the SDK stays connected.
 
 ## Three lessons from WordVenture
 
