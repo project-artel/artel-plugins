@@ -156,9 +156,9 @@ using Artel;
 internal static class MyGameReset
 {
     [ArtelOverrideCheat("reset_game", "Returns to the title screen and resets the current run.")]
-    private static IEnumerator ResetGame(bool clearPlayerPrefs, bool resetStatics)
+    private static IEnumerator ResetGame()
     {
-        yield return GameSession.ResetForQa(clearPlayerPrefs, resetStatics);
+        yield return GameSession.ResetForQa();
     }
 }
 #endif
@@ -166,16 +166,18 @@ internal static class MyGameReset
 
 Replace the example's `GameSession.ResetForQa` with the game's own reset flow. Register one
 override in the game. The attribute takes the built-in cheat's string name. The method must be
-static and declare both parameters with the names and types shown. It may return `void`,
-`string`, or `IEnumerator`. Wait for asynchronous scene and save work before completing.
+static and parameterless. It may return `void`, `string`, or `IEnumerator`. Wait for asynchronous
+scene and save work before completing.
 
 Call `invoke_cheat` with `name: "reset_game"` to run the registered cheat. The SDK ends ARTEL
-behaviors, restores its pause, and releases virtual input before executing the cheat. The game owns scene changes, persistent managers, and interpreting `clearPlayerPrefs`
-(default `false`) and `resetStatics` (default `true`). Keep ARTEL credentials and configuration
-when clearing game preferences. An override failure is reported as a reset failure.
+behaviors, restores its pause, and releases virtual input before executing the cheat. The SDK
+default clears game preferences and static state on every reset. The override owns scene changes,
+persistent managers, and saved progress. Preserve ARTEL credentials and configuration.
+An override failure is reported as a reset failure.
 
-In an Editor or development build, verify the catalog lists one `reset_game` entry and invoke it from a changed game state. Verify repeated resets reach the same starting state, the
-save-clearing flag has the intended effect, and the SDK stays connected.
+In an Editor or development build, verify the catalog lists one `reset_game` entry and invoke it
+from a changed game state. Verify repeated resets reach the same starting state, the saved state
+is reset as intended, and the SDK stays connected.
 
 ## Three lessons from WordVenture
 
