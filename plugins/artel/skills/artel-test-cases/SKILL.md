@@ -51,6 +51,17 @@ cases and name items whose cases still need verification or are deferred.
    discrepancy. Keep any narrower, independently verifiable result in a
    separate case.
 
+## Unity game data
+
+When a case depends on serialized Unity game data, use the
+[`artel-unity-game-analysis` skill](../artel-unity-game-analysis/SKILL.md) to
+establish the fact and its evidence. Mark cases that depend on binary-serialized
+assets **Confirm by running** until the fact is verified in the target build.
+
+During review, independently re-derive any game data fact shared by multiple
+cases before looking at its recorded evidence. If it differs, correct the
+record in `artel/game-knowledge.md` and every affected case.
+
 ## Momentary events
 
 Exclude short-lived events as standalone automated QA cases when the verdict
@@ -100,7 +111,7 @@ cases for evidence that the game received the attempt; an unchanged state
 alone may also mean the agent missed the input.
 
 - **Authorable:** There is evidence for reach, act, and judge in the target build.
-- **Needs build verification:** The path is plausible but the action or evidence
+- **Confirm by running:** The path is plausible but the action or evidence
   has not been confirmed for that build. Name the check still needed.
 - **Deferred:** An action, starting condition, or observation is missing, or
   the case depends on a momentary event. Record why and, where useful, suggest
@@ -126,7 +137,7 @@ registration, but creating them alone does not complete a registration request.
    unavailable or lacks a required operation, or when the user requests the CLI;
    read [the CLI skill](../artel-cli/SKILL.md) for its workflow.
 2. After the review above, register only Authorable cases in the target project
-   and requested folders. Report Needs build verification and Deferred candidates
+   and requested folders. Report Confirm by running and Deferred candidates
    separately with their missing prerequisites; do not register them as runnable
    cases.
 3. Read back each created case through MCP or the CLI and compare its scene,
