@@ -5,8 +5,8 @@ description: >-
   precondition in one call instead of playing up to it: go to a scene, unlock a stage, defeat the
   enemies on screen, see the ending, heal. Use when the user asks to "add a cheat", "치트키 만들어줘",
   "씬 이동 치트", "적 다 죽이는 치트", "엔딩 보는 치트", "[ArtelCheat]", or wants the QA agent to stop
-  failing with SETUP-FAILED. Also use for game-specific reset_game overrides with
-  [ArtelOverrideCheat]. For routines that keep running every frame, use artel-behaviors.
+  failing with SETUP-FAILED. Also use for built-in cheat overrides with [ArtelOverrideCheat].
+  For routines that keep running every frame, use artel-behaviors.
 ---
 
 # ARTEL one-time Game Functions
@@ -142,7 +142,21 @@ public static class MyGameFunctions
 The compile-time rules (types, names, instance methods, release builds) are in
 `references/reference.md`; a mistake is a compile error from the weaver, not a runtime surprise.
 
-## Override the built-in reset_game cheat
+## Built-in cheats
+
+Check the installed SDK's `Runtime/GameFunctions/BuiltInCheats.cs` for the supported names
+and parameters. The table describes the built-ins available in this SDK version.
+
+| Cheat name | Arguments | Default behavior | Override signature |
+| --- | --- | --- | --- |
+| `reset_game` | None | Clears game `PlayerPrefs` and static state, then reloads the startup scene. Preserves SDK preferences. | `static ResetGame()` returning `void`, `string`, or `IEnumerator` |
+
+Invoke a built-in with `invoke_cheat` and its table name in `params[0].name`. Put any declared
+arguments in `params[0].args`. To replace its behavior, register one
+`[ArtelOverrideCheat("<name>", "<description>")]` method that matches the built-in signature.
+The SDK uses the registered override in Editor and development builds.
+
+### Reset game override
 
 Check that the installed SDK contains `ArtelOverrideCheatAttribute.cs`. Use the override when
 the game's own restart or new-game flow is needed to establish a repeatable QA starting state.
@@ -165,9 +179,7 @@ internal static class MyGameReset
 ```
 
 Replace the example's `GameSession.ResetForQa` with the game's own reset flow. Register one
-override in the game. The attribute takes the built-in cheat's string name. The method must be
-static and parameterless. It may return `void`, `string`, or `IEnumerator`. Wait for asynchronous
-scene and save work before completing.
+override in the game and wait for asynchronous scene and save work before completing.
 
 Call `invoke_cheat` with `name: "reset_game"` to run the registered cheat. The SDK ends ARTEL
 behaviors, restores its pause, and releases virtual input before executing the cheat. The SDK
