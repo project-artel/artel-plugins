@@ -51,31 +51,16 @@ cases and name items whose cases still need verification or are deferred.
    discrepancy. Keep any narrower, independently verifiable result in a
    separate case.
 
-## Facts read from game data
+## Unity game data
 
-Scenes, prefabs, and ScriptableObjects name the assets they use by guid, not by file
-name. Resolve those references with
-[the reference script](references/unity-refs.py) rather than by matching guids
-yourself:
-`python3 <this skill>/references/unity-refs.py <project root> <scene, prefab or asset> [--field <name>]`.
-It prints each reference beside the asset file it points to, in list order, as
-`<GameObject> / <component script> . <field>[<index>] -> <asset path>`.
+When a case depends on serialized Unity game data, use the
+[`artel-unity-game-analysis` skill](../artel-unity-game-analysis/SKILL.md) to
+establish the fact and its evidence. Mark cases that depend on binary-serialized
+assets **Confirm by running** until the fact is verified in the target build.
 
-- Without the script, look up one guid at a time and keep the file name in the
-  output: `grep -rl "guid: <guid>" --include=*.meta Assets`. Never pair values from a
-  search over several files by the order of its output. In Claude Code's shell,
-  `grep` over several files returns them in a different order on each run, and `-h`
-  hides the file names that would show the mix-up.
-- A scene or prefab saved as binary (the file does not begin with `%YAML`) cannot be
-  read this way. Do not guess its contents. Mark the cases that depend on it
-  **Confirm by running**.
-- When several cases rest on one fact read from data, such as which level comes
-  first, a level's layout, or a starting value, record the fact once in the game
-  knowledge file (`artel/game-knowledge.md` in the game repository), with its
-  evidence (the script's output line or `file:line`) in the evidence column. Create
-  the file if it does not exist. During review, derive each such fact again without
-  reading the recorded evidence first, then compare. On a mismatch, fix the row and
-  every case that rests on it.
+During review, independently re-derive any game data fact shared by multiple
+cases before looking at its recorded evidence. If it differs, correct the
+record in `artel/game-knowledge.md` and every affected case.
 
 ## Momentary events
 
